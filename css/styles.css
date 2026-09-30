@@ -162,6 +162,7 @@ a:hover { color: var(--desert-light); }
   clip-path: polygon(var(--btn-cut) 0, 100% 0, 100% calc(100% - var(--btn-cut)), calc(100% - var(--btn-cut)) 100%, 0 100%, 0 var(--btn-cut));
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
   touch-action: manipulation;
+  white-space: nowrap;
 }
 /* Border ring that follows the cut corners: outer shape minus an inset
    shape (evenodd). Inner diagonal offset = cut + width * (√2 − 1). */
@@ -244,6 +245,10 @@ a:hover { color: var(--desert-light); }
 .navbar-toggler:focus { box-shadow: none; }
 .navbar-toggler:focus-visible { outline: 2px solid var(--desert); }
 
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .nav-link { padding: .75rem .65rem !important; letter-spacing: .06em; }
+  .nav-link::after { left: .65rem; right: .65rem; }
+}
 @media (max-width: 991.98px) {
   .navbar-collapse { padding: 1rem 0 1.25rem; border-top: 1px solid var(--line); margin-top: .75rem; }
   .nav-link::after { display: none; }
@@ -253,7 +258,7 @@ a:hover { color: var(--desert-light); }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(3rem, 7vw, 6rem) 0 clamp(4rem, 8vw, 7rem);
+  padding: clamp(3rem, 7vw, 6rem) 0 clamp(2.5rem, 5vw, 4rem);
   background:
     radial-gradient(ellipse 60% 50% at 75% 40%, rgba(75, 83, 32, .35), transparent 70%),
     radial-gradient(ellipse 50% 60% at 10% 90%, rgba(201, 177, 131, .08), transparent 70%);
@@ -319,7 +324,15 @@ a:hover { color: var(--desert-light); }
 }
 
 /* ---------- Pillars ---------- */
-.pillars { position: relative; margin-top: -2.5rem; z-index: 2; }
+/* Strip straddles the section divider: line + background change sit at its midline */
+.pillars {
+  position: relative; z-index: 2;
+  background: linear-gradient(180deg, transparent 50%, var(--black-2) 50%);
+}
+.pillars::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 50%;
+  height: 1px; background: var(--line-strong);
+}
 .pillars__bar {
   background: linear-gradient(90deg, var(--olive-deep), #1c2010 50%, var(--olive-deep));
   border-top: 1px solid var(--line-strong);
@@ -413,7 +426,7 @@ a:hover { color: var(--desert-light); }
 
 /* ---------- Mission (1 Peter 5:8) ---------- */
 .mission-sec {
-  border-top: 1px solid var(--line);
+  padding-top: clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid var(--line);
   background:
     radial-gradient(ellipse 55% 60% at 50% 30%, rgba(75, 83, 32, .32), transparent 70%),
@@ -558,7 +571,6 @@ a:hover { color: var(--desert-light); }
 @media (max-width: 991.98px) {
   .hero__media { margin: 0 auto; }
   .hero__stripe { right: 10%; }
-  .pillars { margin-top: 0; }
 }
 @media (max-width: 767.98px) {
   .navbar-brand img { height: 50px; }
