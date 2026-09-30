@@ -258,7 +258,7 @@ a:hover { color: var(--desert-light); }
 
 .hero__media { position: relative; max-width: 520px; margin-left: auto; }
 .hero__frame { aspect-ratio: 4 / 5; }
-.hero__frame img { object-position: center 30%; }
+.hero__frame img { object-position: center 45%; }
 .hero__frame::after { /* vignette into page */
   content: ""; position: absolute; inset: 1px;
   background: linear-gradient(180deg, transparent 55%, rgba(11,12,10,.75));
@@ -271,7 +271,7 @@ a:hover { color: var(--desert-light); }
   border: 1px solid var(--line-strong);
   padding: 1rem 1.25rem;
 }
-.hud-card--float { position: absolute; left: -3rem; bottom: 12%; min-width: 200px; }
+.hud-card--float { position: absolute; left: -3rem; top: 10%; min-width: 200px; }
 .hud-card__label {
   font-size: .8rem; color: var(--text-muted);
   padding-bottom: .6rem; margin-bottom: .75rem;
