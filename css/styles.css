@@ -129,12 +129,14 @@ a:hover { color: var(--desert-light); }
 }
 
 .tag {
-  display: inline-flex; align-items: center;
-  font-size: .8rem; color: var(--desert);
-  padding: .4rem .8rem;
-  border: 1px solid var(--line-strong);
-  background: rgba(201, 177, 131, .05);
+  display: inline-flex; align-items: center; gap: .75rem;
+  font-size: .85rem; color: var(--desert);
   margin-bottom: 1.25rem;
+}
+.tag::before {
+  content: "";
+  width: 2rem; height: 1px;
+  background: var(--desert);
 }
 
 /* ---------- Buttons ---------- */
@@ -190,7 +192,7 @@ a:hover { color: var(--desert-light); }
 .site-header.is-scrolled { background: rgba(11, 12, 10, .96); }
 
 .navbar { padding: .75rem 0; }
-.navbar-brand img { height: 52px; width: auto; }
+.navbar-brand img { height: 64px; width: auto; }
 .nav-link {
   font-family: var(--font-display);
   font-weight: 600; font-size: 1.05rem;
@@ -348,11 +350,6 @@ a:hover { color: var(--desert-light); }
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(180deg, rgba(37,42,18,.15), rgba(17,19,15,.9));
 }
-.course__idx {
-  position: absolute; left: 1.25rem; bottom: .9rem; z-index: 1;
-  font-size: 1.6rem; color: var(--desert);
-}
-.course__idx::after { content: " /"; color: var(--text-muted); font-size: 1rem; }
 
 .course__body { padding: 1.25rem 1.5rem 1.6rem; display: flex; flex-direction: column; flex: 1; }
 .course__title { font-size: 1.65rem; font-weight: 700; margin: 0 0 .6rem; }
@@ -387,16 +384,6 @@ a:hover { color: var(--desert-light); }
 }
 .about__media { position: relative; max-width: 460px; }
 .about__media .tac-frame { aspect-ratio: 9 / 11; }
-.about__badge {
-  position: absolute; right: -1.5rem; bottom: 2rem;
-  display: flex; flex-direction: column; align-items: flex-start; gap: .4rem;
-  background: var(--black);
-  border: 1px solid var(--line-strong);
-  padding: .9rem 1.1rem;
-  font-size: .72rem; color: var(--text-muted);
-}
-.about__badge img { height: 40px; width: auto; }
-@media (max-width: 575.98px) { .about__badge { right: .75rem; } }
 
 .mission .tac-card__inner { padding: 1.5rem 1.75rem; }
 .mission__statement {
@@ -519,6 +506,6 @@ a:hover { color: var(--desert-light); }
   .pillars { margin-top: 0; }
 }
 @media (max-width: 767.98px) {
-  .navbar-brand img { height: 42px; }
+  .navbar-brand img { height: 50px; }
   .about__media { margin: 0 auto; }
 }
