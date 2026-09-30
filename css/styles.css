@@ -282,22 +282,12 @@ a:hover { color: var(--desert-light); }
   clip-path: inherit; pointer-events: none;
 }
 
-.hud-card {
-  background: rgba(17, 19, 15, .9);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--line-strong);
-  padding: 1rem 1.25rem;
-}
-.hud-card--float { position: absolute; left: -3rem; top: 10%; min-width: 200px; }
 .hud-card__label {
   font-size: .8rem; color: var(--text-muted);
   padding-bottom: .6rem; margin-bottom: .75rem;
   border-bottom: 1px solid var(--line);
 }
 .hud-card__label span { color: var(--desert); font-size: 1rem; }
-.hud-list { list-style: none; padding: 0; margin: 0; font-size: .8rem; color: var(--bone); }
-.hud-list li { padding: .2rem 0; }
-.hud-list li::before { content: "▸"; color: var(--desert); margin-right: .5rem; }
 
 .hud-status {
   position: absolute; right: 1.25rem; top: 1.25rem;
