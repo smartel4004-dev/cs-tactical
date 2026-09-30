@@ -243,6 +243,16 @@ a:hover { color: var(--desert-light); }
   width: 48px; height: 48px; padding: 0;
 }
 .navbar-toggler:focus { box-shadow: none; }
+/* Hamburger ↔ X, driven by Bootstrap's aria-expanded */
+.navbar-toggler { position: relative; }
+.navbar-toggler i {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-med) var(--ease-out);
+}
+.navbar-toggler .toggler-close { opacity: 0; transform: rotate(-90deg); }
+.navbar-toggler[aria-expanded="true"] .toggler-open { opacity: 0; transform: rotate(90deg); }
+.navbar-toggler[aria-expanded="true"] .toggler-close { opacity: 1; transform: none; }
 .navbar-toggler:focus-visible { outline: 2px solid var(--desert); }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
