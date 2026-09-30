@@ -81,6 +81,15 @@ a:hover { color: var(--desert-light); }
   outline-offset: 3px;
 }
 
+/* Worn / distressed display headings, matching the logo's scratch texture */
+.hero__title, .section-title {
+  -webkit-mask-image: url("../media/wear.svg");
+          mask-image: url("../media/wear.svg");
+  -webkit-mask-size: 300px;
+          mask-size: 300px;
+}
+.section-title { -webkit-mask-size: 220px; mask-size: 220px; }
+
 .mono { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
 .text-desert { color: var(--desert); }
 
@@ -275,7 +284,7 @@ a:hover { color: var(--desert-light); }
 
 .hero__media { position: relative; max-width: 520px; margin-left: auto; }
 .hero__frame { aspect-ratio: 4 / 5; }
-.hero__frame img { object-position: center 45%; }
+.hero__frame img { object-position: 36% center; }
 .hero__frame::after { /* vignette into page */
   content: ""; position: absolute; inset: 1px;
   background: linear-gradient(180deg, transparent 55%, rgba(11,12,10,.75));
