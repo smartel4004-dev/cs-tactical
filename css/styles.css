@@ -103,9 +103,10 @@ a:hover { color: var(--desert-light); }
    Crosshair by default; red-dot optic over anything clickable. */
 @media (hover: hover) and (pointer: fine) {
   html, body { cursor: url("../media/cursor-crosshair.svg") 16 16, crosshair; }
-  html a, html button, html .btn, html select, html summary,
-  html [role="button"], html label[for], html .navbar-toggler {
-    cursor: url("../media/cursor-reddot.svg") 16 16, pointer;
+  /* !important: Bootstrap's button:not(:disabled) / [type=submit]:not(:disabled)
+     pointer rules out-specify a plain selector here */
+  html :is(a, button, .btn, select, summary, [role="button"], label[for], [type="submit"], .navbar-toggler):not(:disabled) {
+    cursor: url("../media/cursor-reddot.svg") 16 16, pointer !important;
   }
   html input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
   html textarea { cursor: text; }
