@@ -81,5 +81,33 @@
     })
   );
 
+  // Cursor parallax: [data-parallax="N"] drifts up to N px opposite the cursor.
+  // Mouse/trackpad only; skipped entirely under prefers-reduced-motion.
+  const layers = [...document.querySelectorAll('[data-parallax]')];
+  const canParallax = matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (layers.length && canParallax) {
+    const depth = layers.map((el) => parseFloat(el.dataset.parallax) || 0);
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const tick = () => {
+      cx += (tx - cx) * 0.08;
+      cy += (ty - cy) * 0.08;
+      const settled = Math.abs(tx - cx) + Math.abs(ty - cy) < 0.001;
+      if (settled) { cx = tx; cy = ty; }
+      layers.forEach((el, i) => {
+        el.style.translate = `${(-cx * depth[i]).toFixed(2)}px ${(-cy * depth[i]).toFixed(2)}px`;
+      });
+      raf = settled ? 0 : requestAnimationFrame(tick);
+    };
+    const aim = (x, y) => {
+      tx = x; ty = y;
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+    window.addEventListener('mousemove', (e) => {
+      aim((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
+    }, { passive: true });
+    document.documentElement.addEventListener('mouseleave', () => aim(0, 0));
+  }
+
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
