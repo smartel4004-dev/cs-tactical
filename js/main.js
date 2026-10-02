@@ -94,8 +94,11 @@
     let tx = 0, ty = 0, raf = 0;
     const apply = () => {
       raf = 0;
+      // full strength at 1400px+, scaled down on narrower windows so layers stay in bounds
+      const k = Math.min(1, window.innerWidth / 1400);
       layers.forEach((el, i) => {
-        el.style.translate = `${(-tx * depth[i]).toFixed(1)}px ${(-ty * depth[i]).toFixed(1)}px`;
+        const d = depth[i] * k;
+        el.style.translate = `${(-tx * d).toFixed(1)}px ${(-ty * d).toFixed(1)}px`;
       });
     };
     const aim = (x, y) => {

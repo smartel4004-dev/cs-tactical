@@ -36,6 +36,8 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 180ms;
   --dur-med: 320ms;
+  --dur-parallax: 1400ms;
+  --ease-parallax: cubic-bezier(0.23, 1, 0.32, 1); /* long, soft ease-out */
 
   /* Card corner cut */
   --cut: 18px;
@@ -588,9 +590,9 @@ main { position: relative; z-index: 0; isolation: isolate; }
 
 /* Cursor parallax layers: own GPU layer (no per-frame repaint, so thin
    clip-path borders don't shimmer) and CSS-eased translate. */
-[data-parallax] { will-change: transform; transition: translate 900ms var(--ease-out); }
+[data-parallax] { will-change: transform; transition: translate var(--dur-parallax) var(--ease-parallax); }
 .js .reveal[data-parallax] {
-  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out), translate 900ms var(--ease-out);
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out), translate var(--dur-parallax) var(--ease-parallax);
 }
 
 @media (prefers-reduced-motion: reduce) {
