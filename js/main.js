@@ -42,6 +42,8 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
           io.unobserve(entry.target);
+          // drop the stagger delay once revealed so it doesn't lag parallax
+          setTimeout(() => { entry.target.style.transitionDelay = ''; }, 900);
         }
       });
     }, { threshold: 0.12 });
@@ -82,26 +84,23 @@
   );
 
   // Cursor parallax: [data-parallax="N"] drifts up to N px opposite the cursor.
-  // Mouse/trackpad only; skipped entirely under prefers-reduced-motion.
+  // JS only sets the target (max once per frame); the CSS translate transition
+  // does the easing on the compositor. Mouse/trackpad only; off under reduced motion.
   const layers = [...document.querySelectorAll('[data-parallax]')];
   const canParallax = matchMedia('(hover: hover) and (pointer: fine)').matches &&
     !matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (layers.length && canParallax) {
     const depth = layers.map((el) => parseFloat(el.dataset.parallax) || 0);
-    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
-    const tick = () => {
-      cx += (tx - cx) * 0.08;
-      cy += (ty - cy) * 0.08;
-      const settled = Math.abs(tx - cx) + Math.abs(ty - cy) < 0.001;
-      if (settled) { cx = tx; cy = ty; }
+    let tx = 0, ty = 0, raf = 0;
+    const apply = () => {
+      raf = 0;
       layers.forEach((el, i) => {
-        el.style.translate = `${(-cx * depth[i]).toFixed(2)}px ${(-cy * depth[i]).toFixed(2)}px`;
+        el.style.translate = `${(-tx * depth[i]).toFixed(1)}px ${(-ty * depth[i]).toFixed(1)}px`;
       });
-      raf = settled ? 0 : requestAnimationFrame(tick);
     };
     const aim = (x, y) => {
       tx = x; ty = y;
-      if (!raf) raf = requestAnimationFrame(tick);
+      if (!raf) raf = requestAnimationFrame(apply);
     };
     window.addEventListener('mousemove', (e) => {
       aim((e.clientX / window.innerWidth) * 2 - 1, (e.clientY / window.innerHeight) * 2 - 1);
