@@ -208,14 +208,17 @@ a:hover { color: var(--desert-light); }
 .utility-bar a:hover { color: var(--desert); }
 .utility-bar i { color: var(--desert); margin-right: .25rem; }
 
+/* No backdrop-filter here: blurred sticky headers flicker in Chrome/Safari
+   when composited content (masks, clip-paths, reveal transforms) scrolls under. */
 .site-header {
   position: sticky; top: 0; z-index: 1030;
-  background: rgba(11, 12, 10, .82);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(11, 12, 10, .94);
   border-bottom: 1px solid var(--line);
+  transform: translateZ(0); /* own compositor layer, always painted on top */
   transition: background var(--dur-med) var(--ease-out);
 }
+/* Keep all page content in one stacking context beneath the header */
+main { position: relative; z-index: 0; isolation: isolate; }
 .site-header.is-scrolled { background: rgba(11, 12, 10, .96); }
 
 .navbar { padding: .75rem 0; }
