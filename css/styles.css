@@ -99,6 +99,18 @@ a:hover { color: var(--desert-light); }
 }
 .skip-link:focus { top: 1rem; color: var(--black); }
 
+/* ---------- Custom cursor (mouse/trackpad only) ----------
+   Crosshair by default; red-dot optic over anything clickable. */
+@media (hover: hover) and (pointer: fine) {
+  html, body { cursor: url("../media/cursor-crosshair.svg") 16 16, crosshair; }
+  html a, html button, html .btn, html select, html summary,
+  html [role="button"], html label[for], html .navbar-toggler {
+    cursor: url("../media/cursor-reddot.svg") 16 16, pointer;
+  }
+  html input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+  html textarea { cursor: text; }
+}
+
 /* ---------- Tactical frames & cards (clipped corners) ---------- */
 .tac-card {
   position: relative;
