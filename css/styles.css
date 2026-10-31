@@ -317,7 +317,7 @@ main { position: relative; z-index: 0; isolation: isolate; }
 
 .hero__media { position: relative; max-width: 520px; margin-left: auto; }
 .hero__frame { aspect-ratio: 4 / 5; }
-.hero__frame img { object-position: 36% center; }
+.hero__frame img { object-position: center; }
 .hero__frame::after { /* vignette into page */
   content: ""; position: absolute; inset: 1px;
   background: linear-gradient(180deg, transparent 55%, rgba(11,12,10,.75));
@@ -431,6 +431,9 @@ main { position: relative; z-index: 0; isolation: isolate; }
 
 .course:hover { background: var(--line-strong); transform: translateY(-4px); }
 .course:hover .course__img img { transform: scale(1.05); filter: grayscale(.2) sepia(.15) contrast(1.05) brightness(.9); }
+/* Photos already color-graded to the palette (media/curt) skip the CSS treatment */
+.tac-frame img.is-graded, .course__img img.is-graded { filter: none; }
+.course:hover .course__img img.is-graded { filter: brightness(1.12); }
 .course:hover .course__link i { transform: translateX(3px); }
 .course__link i { transition: transform var(--dur-fast) var(--ease-out); }
 
